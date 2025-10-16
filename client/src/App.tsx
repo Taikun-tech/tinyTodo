@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useState} from 'react';
+import TodoList from './components/todoList';
 
-function App() {
-  const [count, setCount] = useState(0)
+export type Todo = {
+  id: string;
+  text: string;
+  date: Date;
+}
+export type TodoList = Todo[];
+
+
+export default function App() {
+  const [todo, setTodo] = useState<string>('');
+  const [todoList, setTodoList] = useState<TodoList>([]);
+
+  /**
+   * Todo追加
+   */
+  function addTodo() {
+    setTodoList([...todoList,
+    {
+      id: 'TD' + Math.floor((Math.random() * 10000)).toString(5),
+      text: todo,
+      date: new Date()
+    }]
+    );
+  }
+
+  /**
+   * Todo削除
+   * @param id Todoのid
+   */
+  function deleteTodo(id: string) {
+    const newTodoList = todoList.filter((todo: Todo) =>
+      todo.id !== id);
+    setTodoList(newTodoList);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <input type="text" value={todo}
+        onChange={
+          (e) => setTodo(e.target.value)
+        }
+        placeholder='Please write a Todo'></input>
+      <button onClick={addTodo}>Add</button>
+      <TodoList todoList={todoList} onClick={deleteTodo} />
     </>
-  )
+  );
 }
-
-export default App

@@ -1,0 +1,26 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    "target": "es2017",                // 出力するJSのバージョン
+    "module": "commonjs",              // Node.js用モジュール形式
+    "rootDir": "src",                  // TypeScriptソースのルート
+    "outDir": "dist",                  // コンパイル後の出力先
+    "esModuleInterop": true,           // import/exportを自然に書けるようにする
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",        // Node.jsのモジュール解決方法に合わせる
+           // ライブラリの型チェックをスキップ（ビルド高速化）
+    // Recommended Options
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
+  }, 
+  "scripts": {
+  "dev": "ts-node-dev src/app.ts",
+  "build": "tsc",
+  "start": "node dist/app.js"
+  }, "include": ["src"],                  // コンパイル対象のディレクトリ
+}
