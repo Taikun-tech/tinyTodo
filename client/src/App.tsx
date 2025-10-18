@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import TodoList from './components/todoList';
+import TodoForm from './components/TodoForm';
+import AddButton from './components/addButton';
 
 export type Todo = {
   id: string;
@@ -38,12 +40,8 @@ export default function App() {
 
   return (
     <>
-      <input type="text" value={todo}
-        onChange={
-          (e) => setTodo(e.target.value)
-        }
-        placeholder='Please write a Todo'></input>
-      <button onClick={addTodo}>Add</button>
+      <TodoForm todo={todo} onChange={(e) => setTodo(e.target.value)} />
+      <AddButton onClick = {addTodo} />
       <TodoList todoList={todoList} onClick={deleteTodo} />
     </>
   );
